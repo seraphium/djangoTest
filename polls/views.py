@@ -5,6 +5,8 @@ from django.views import generic
 from django.utils import timezone
 from .models import Choice, Question
 
+from django.core import serializers
+
 
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
@@ -44,6 +46,11 @@ def vote(request, question_id):
     else:
         selected_choice.votes += 1
         selected_choice.save()
+
+        # try serializer
+        # data = serializers.serialize("json", Choice.objects.all())
+        # print(data)
+
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This
         # prevents data from being posted twice if a
